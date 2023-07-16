@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 339392307}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339392306}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.489, z: 0}
+  m_LocalPosition: {x: -0.03, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -294,7 +294,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581423349
 GameObject:
@@ -306,8 +306,8 @@ GameObject:
   m_Component:
   - component: {fileID: 581423350}
   - component: {fileID: 581423351}
-  - component: {fileID: 581423353}
   - component: {fileID: 581423352}
+  - component: {fileID: 581423354}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -323,7 +323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581423349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.262, y: 1.071, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -331,7 +331,7 @@ Transform:
   - {fileID: 1699083597}
   - {fileID: 459718817}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &581423351
 MonoBehaviour:
@@ -346,12 +346,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpingPower: 16
-  speed: 2
-  gameInput: {fileID: 2053916077}
-  groundCheck: {fileID: 339392307}
+  speed: 4
+  checkSphereRadius: {x: 0.46, y: 0.1}
+  feet: {fileID: 339392307}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  gameInput: {fileID: 2053916077}
 --- !u!50 &581423352
 Rigidbody2D:
   serializedVersion: 4
@@ -368,7 +369,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bb797ca98bf05e04a96448b9004a92d1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -379,7 +380,7 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &581423353
+--- !u!61 &581423354
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,7 +412,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.03, y: -0.101568654}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -422,7 +423,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.46, y: 0.7968627}
   m_EdgeRadius: 0
 --- !u!1 &619394800
 GameObject:
@@ -504,7 +505,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1662858106
 PrefabInstance:
@@ -520,7 +521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5528877041341411010, guid: 6dd2649621294cb429f62de72c15a9ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.23
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5528877041341411010, guid: 6dd2649621294cb429f62de72c15a9ef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1120,7 +1121,7 @@ Transform:
   m_Children:
   - {fileID: 1713267384}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2053916076
 GameObject:
@@ -1164,5 +1165,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
