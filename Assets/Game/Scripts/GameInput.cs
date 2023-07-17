@@ -1,23 +1,31 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class GameInput : MonoBehaviour
-{
+public class GameInput : MonoBehaviour {
+    public event EventHandler OnPlayerJump;
+
     private GameInputActions inputActions;
-    void Awake()
-    {
+    void Awake() {
         inputActions = new GameInputActions();
     }
-    private void Start()
-    {
+
+    private void Start() {
         inputActions.Enable();
+        inputActions.Player.Jump.performed += OnPlayerJumpPerformed;
     }
-    public float GetMovement()
-    {
+
+    private void OnDestroy() {
+        inputActions.Player.Jump.performed -= OnPlayerJumpPerformed;
+        inputActions.Dispose();
+    }
+
+    private void OnPlayerJumpPerformed(InputAction.CallbackContext callbackContext) {
+        OnPlayerJump.Invoke(this, EventArgs.Empty);
+    }
+
+    public float GetMovement() {
         float input = inputActions.Player.Movement.ReadValue<float>();
         return input;
-    }
-    private void OnDestroy()
-    {
-        inputActions.Dispose();
     }
 }

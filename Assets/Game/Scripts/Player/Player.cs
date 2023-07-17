@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -8,7 +9,7 @@ public class Player : MonoBehaviour {
     private Dust dust;
 
     [Header("Values")]
-    [SerializeField] private float jumpingPower = 10f;
+    [SerializeField] private float jumpingPower = 8f;
     [SerializeField] private float speed = 4f;
 
     [Header("Ground Detection")]
@@ -23,18 +24,30 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         dust = GetComponentInChildren<Dust>();
         dust.Hide();
+
+        gameInput.OnPlayerJump += OnJump;
     }
 
     void Update() {
         Flip();
         ShowDust();
-        horizontal = gameInput.GetMovement();
+        HandleMovement();
         IsWalking = horizontal != 0f;
     }
 
     private void FixedUpdate() {
         isGrounded = Physics2D.OverlapBox(feet.position, checkSphereRadius, 0f, groundLayer);
+    }
+
+    private void HandleMovement() {
+        horizontal = gameInput.GetMovement();
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    }
+
+    private void OnJump(object sender, EventArgs e) {
+        if (!isGrounded) return;
+
+        rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
     }
 
     private void Flip() {
@@ -52,6 +65,10 @@ public class Player : MonoBehaviour {
         } else {
             dust.Hide();
         }
+    }
+
+    public Vector2 GetVelocity() {
+        return rb.velocity;
     }
 
     private void OnDrawGizmos() {

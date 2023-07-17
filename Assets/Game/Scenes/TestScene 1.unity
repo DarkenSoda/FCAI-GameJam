@@ -305,9 +305,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 581423350}
-  - component: {fileID: 581423351}
   - component: {fileID: 581423352}
   - component: {fileID: 581423354}
+  - component: {fileID: 581423351}
+  - component: {fileID: 581423356}
+  - component: {fileID: 581423355}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -345,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37e15812b76d0d4b8e01bd87255215f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpingPower: 16
+  jumpingPower: 8
   speed: 4
   checkSphereRadius: {x: 0.46, y: 0.1}
   feet: {fileID: 339392307}
@@ -425,6 +427,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.46, y: 0.7968627}
   m_EdgeRadius: 0
+--- !u!114 &581423355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581423349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185fa6866a95b2846956d5f03246d94e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &581423356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581423349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02567ee839023c843bd0f19efe7d4c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1699083598}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
