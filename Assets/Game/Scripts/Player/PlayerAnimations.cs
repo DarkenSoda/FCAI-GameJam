@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour {
-    [SerializeField] private Animator anim;
+    private Animator anim;
     private int currentState;
     private int previousState;
 
@@ -14,6 +14,10 @@ public class PlayerAnimations : MonoBehaviour {
     private readonly int Land = Animator.StringToHash("Land");
 
     private float lockedTill;
+
+    private void Start() {
+        anim = GetComponent<Animator>();
+    }
 
     private void Update() {
         currentState = GetState();
@@ -27,7 +31,7 @@ public class PlayerAnimations : MonoBehaviour {
     private int GetState() {
         if(Time.time < lockedTill) return currentState;
 
-        Vector2 velocity = GetComponent<Player>().GetVelocity();
+        Vector2 velocity = GetComponentInParent<Player>().GetVelocity();
 
         if(velocity.y > 0) return Jump;
         if(velocity.y < 0) return Fall;

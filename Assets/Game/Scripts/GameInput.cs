@@ -24,8 +24,13 @@ public class GameInput : MonoBehaviour {
         OnPlayerJump.Invoke(this, EventArgs.Empty);
     }
 
-    public float GetMovement() {
+    public float GetHorizontalMovement() {
         float input = inputActions.Player.Movement.ReadValue<float>();
+        return input;
+    }
+
+    public float GetVerticalMovement() {
+        float input = inputActions.Player.Climb.ReadValue<float>();
         return input;
     }
 }

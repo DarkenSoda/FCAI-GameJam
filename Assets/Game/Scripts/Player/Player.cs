@@ -4,7 +4,6 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     private float horizontal;
     private bool isFacingRight = true;
-    private bool isGrounded = true;
     private Rigidbody2D rb;
     private Dust dust;
 
@@ -32,20 +31,21 @@ public class Player : MonoBehaviour {
         Flip();
         ShowDust();
         HandleMovement();
-        IsWalking = horizontal != 0f;
     }
 
     private void FixedUpdate() {
-        isGrounded = Physics2D.OverlapBox(feet.position, checkSphereRadius, 0f, groundLayer);
+        IsGrounded = Physics2D.OverlapBox(feet.position, checkSphereRadius, 0f, groundLayer);
     }
 
     private void HandleMovement() {
-        horizontal = gameInput.GetMovement();
+        horizontal = gameInput.GetHorizontalMovement();
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+        IsWalking = horizontal != 0f;
     }
 
     private void OnJump(object sender, EventArgs e) {
-        if (!isGrounded) return;
+        if (!IsGrounded) return;
 
         rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
     }
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
     }
 
     private void ShowDust() {
-        if (IsWalking && isGrounded) {
+        if (IsWalking && IsGrounded) {
             dust.Show();
         } else {
             dust.Hide();
@@ -76,4 +76,5 @@ public class Player : MonoBehaviour {
     }
 
     public bool IsWalking { get; private set; }
+    public bool IsGrounded { get; private set; }
 }
