@@ -49,12 +49,6 @@ public class ClimbLadder : MonoBehaviour {
 
         inLadderRange = false;
         IsClimbing = false;
-
-
-        // Might remove this later
-        // Decrease his y velocity so he doesn't fly after climbing
-        // Can also set this to 0 to remove the small fly after climbing
-        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2);
     }
 
     public bool IsClimbing { get; private set; }

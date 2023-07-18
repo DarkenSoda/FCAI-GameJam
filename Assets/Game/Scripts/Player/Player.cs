@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     private float horizontal;
-    private bool isFacingRight = true;
     private Rigidbody2D rb;
     private Dust dust;
 
     [Header("Values")]
     [SerializeField] private float jumpingPower = 8f;
-    [SerializeField] private float speed = 4f;
+    [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float slidingSpeed;
 
     [Header("Ground Detection")]
     [SerializeField] private Vector2 checkSphereRadius;
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         dust = GetComponentInChildren<Dust>();
         dust.Hide();
+        IsFacingRight = true;
 
         gameInput.OnPlayerJump += OnJump;
     }
@@ -39,7 +40,16 @@ public class Player : MonoBehaviour {
 
     private void HandleMovement() {
         horizontal = gameInput.GetHorizontalMovement();
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+        if (GetComponent<IceSliding>().IsOnIce) {
+            if (IsFacingRight) {
+                rb.velocity = new Vector2(horizontal * moveSpeed + slidingSpeed, rb.velocity.y);
+            } else {
+                rb.velocity = new Vector2(horizontal * moveSpeed - slidingSpeed, rb.velocity.y);
+            }
+        } else {
+            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        }
 
         IsWalking = horizontal != 0f;
     }
@@ -51,8 +61,8 @@ public class Player : MonoBehaviour {
     }
 
     private void Flip() {
-        if ((isFacingRight && horizontal < 0f) || (!isFacingRight && horizontal > 0f)) {
-            isFacingRight = !isFacingRight;
+        if ((IsFacingRight && horizontal < 0f) || (!IsFacingRight && horizontal > 0f)) {
+            IsFacingRight = !IsFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
@@ -77,4 +87,5 @@ public class Player : MonoBehaviour {
 
     public bool IsWalking { get; private set; }
     public bool IsGrounded { get; private set; }
+    public bool IsFacingRight { get; private set; }
 }

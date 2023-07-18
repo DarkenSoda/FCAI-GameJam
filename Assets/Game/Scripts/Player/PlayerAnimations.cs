@@ -38,7 +38,7 @@ public class PlayerAnimations : MonoBehaviour {
 
         if(velocity.y == 0 && currentState == Fall) return LockState(Land, .2f);
 
-        if(velocity.x != 0) return Run;
+        if(GetComponentInParent<Player>().IsWalking) return Run;
 
         return Idle;
     }
