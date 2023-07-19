@@ -31,7 +31,7 @@ public class ClimbLadder : MonoBehaviour {
             rb.gravityScale = 0f;
             rb.velocity = new Vector2(rb.velocity.x, vertical * climbingSpeed);
         } else {
-            rb.gravityScale = 1f;
+            rb.gravityScale = 2f;
         }
 
     }
