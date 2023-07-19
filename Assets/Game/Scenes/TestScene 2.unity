@@ -917,7 +917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &149640460
 Transform:
   m_ObjectHideFlags: 0
@@ -1392,7 +1392,7 @@ Tilemap:
       - {fileID: 1779529995, guid: c2f64040d30f0ed48bcf3b1eb4c9cd4a, type: 3}
       - {fileID: -170155355, guid: c2f64040d30f0ed48bcf3b1eb4c9cd4a, type: 3}
       - {fileID: 78351827, guid: c2f64040d30f0ed48bcf3b1eb4c9cd4a, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 0, y: -4, z: 0}
@@ -15023,7 +15023,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031379999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.02, y: -0.8800001, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22862,7 +22862,7 @@ GameObject:
   - component: {fileID: 1453092737}
   - component: {fileID: 1453092736}
   - component: {fileID: 1453092739}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WaterBonds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23820,6 +23820,7 @@ MonoBehaviour:
   jumpingPower: 8
   moveSpeed: 4
   slidingSpeed: 1
+  environmentController: {fileID: 1924788600}
   checkSphereRadius: {x: 0.46, y: 0.1}
   feet: {fileID: 1157428472}
   groundLayer:
@@ -24529,7 +24530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1785905114
 Transform:
   m_ObjectHideFlags: 0
@@ -24729,6 +24730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1924788599}
   - component: {fileID: 1924788598}
+  - component: {fileID: 1924788600}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -24767,6 +24769,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1924788600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924788597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800f93dd1f8894944b82189fd2baa8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSeason: 0
+  seasonObjects:
+  - {fileID: 1708606058}
+  - {fileID: 1785905113}
+  - {fileID: 538185772}
+  - {fileID: 149640459}
 --- !u!1 &1925863772
 GameObject:
   m_ObjectHideFlags: 0

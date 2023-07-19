@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ClimbLadder : MonoBehaviour {
     private bool inLadderRange;
-
     [SerializeField] private float climbingSpeed = 4f;
-
     [SerializeField] private GameInput gameInput;
     private Rigidbody2D rb;
 

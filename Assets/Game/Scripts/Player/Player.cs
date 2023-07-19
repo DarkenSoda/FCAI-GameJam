@@ -1,15 +1,18 @@
 using System;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
     private float horizontal;
     private Rigidbody2D rb;
     private Dust dust;
-
     [Header("Values")]
     [SerializeField] private float jumpingPower = 8f;
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float slidingSpeed;
+    
+    [Header("Environment Change Detection")]
+    [SerializeField] private EnvironmentController environmentController;
 
     [Header("Ground Detection")]
     [SerializeField] private Vector2 checkSphereRadius;
@@ -24,8 +27,13 @@ public class Player : MonoBehaviour {
         dust = GetComponentInChildren<Dust>();
         dust.Hide();
         IsFacingRight = true;
-
         gameInput.OnPlayerJump += OnJump;
+        gameInput.OnPlayerChangeEnvironment += OnPlayerChangeEnvironment;
+    }
+
+    private void OnPlayerChangeEnvironment(object sender, EventArgs e)
+    {
+        environmentController.ChangeEnvironment();
     }
 
     void Update() {
@@ -84,7 +92,6 @@ public class Player : MonoBehaviour {
     private void OnDrawGizmos() {
         Gizmos.DrawWireCube(feet.position, checkSphereRadius);
     }
-
     public bool IsWalking { get; private set; }
     public bool IsGrounded { get; private set; }
     public bool IsFacingRight { get; private set; }

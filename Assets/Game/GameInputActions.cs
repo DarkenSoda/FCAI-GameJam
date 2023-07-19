@@ -53,6 +53,15 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnvironmentChange"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b7864f2-a3e9-4548-a63a-c72c6e225da4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -198,6 +207,17 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Climb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76b2d578-fda6-4e7d-bf89-0e99dfa59a3e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnvironmentChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -209,6 +229,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Climb = m_Player.FindAction("Climb", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_EnvironmentChange = m_Player.FindAction("EnvironmentChange", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Climb;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_EnvironmentChange;
     public struct PlayerActions
     {
         private @GameInputActions m_Wrapper;
@@ -280,6 +302,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Climb => m_Wrapper.m_Player_Climb;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @EnvironmentChange => m_Wrapper.m_Player_EnvironmentChange;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -298,6 +321,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @EnvironmentChange.started += instance.OnEnvironmentChange;
+            @EnvironmentChange.performed += instance.OnEnvironmentChange;
+            @EnvironmentChange.canceled += instance.OnEnvironmentChange;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -311,6 +337,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @EnvironmentChange.started -= instance.OnEnvironmentChange;
+            @EnvironmentChange.performed -= instance.OnEnvironmentChange;
+            @EnvironmentChange.canceled -= instance.OnEnvironmentChange;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -333,5 +362,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnClimb(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnEnvironmentChange(InputAction.CallbackContext context);
     }
 }
