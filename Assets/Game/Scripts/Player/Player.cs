@@ -10,30 +10,21 @@ public class Player : MonoBehaviour {
     [SerializeField] private float jumpingPower = 8f;
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float slidingSpeed;
-    
-    [Header("Environment Change Detection")]
-    [SerializeField] private EnvironmentController environmentController;
 
     [Header("Ground Detection")]
     [SerializeField] private Vector2 checkSphereRadius;
     [SerializeField] private Transform feet;
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("Input")]
-    [SerializeField] private GameInput gameInput;
-
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         dust = GetComponentInChildren<Dust>();
         dust.Hide();
         IsFacingRight = true;
-        gameInput.OnPlayerJump += OnJump;
-        gameInput.OnPlayerChangeEnvironment += OnPlayerChangeEnvironment;
+        GameInput.Instance.OnPlayerJump += OnJump;
     }
-
-    private void OnPlayerChangeEnvironment(object sender, EventArgs e)
-    {
-        environmentController.ChangeEnvironment();
+    private void OnDestroy() {
+        GameInput.Instance.OnPlayerJump -= OnJump;
     }
 
     void Update() {
@@ -47,16 +38,17 @@ public class Player : MonoBehaviour {
     }
 
     private void HandleMovement() {
-        horizontal = gameInput.GetHorizontalMovement();
+        horizontal = GameInput.Instance.GetHorizontalMovement();
 
+        float moveDir = horizontal * moveSpeed;
         if (GetComponent<IceSliding>().IsOnIce) {
             if (IsFacingRight) {
-                rb.velocity = new Vector2(horizontal * moveSpeed + slidingSpeed, rb.velocity.y);
+                rb.velocity = new Vector2((moveDir + slidingSpeed) * Time.deltaTime, rb.velocity.y);
             } else {
-                rb.velocity = new Vector2(horizontal * moveSpeed - slidingSpeed, rb.velocity.y);
+                rb.velocity = new Vector2((moveDir - slidingSpeed) * Time.deltaTime, rb.velocity.y);
             }
         } else {
-            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(moveDir * Time.deltaTime, rb.velocity.y);
         }
 
         IsWalking = horizontal != 0f;
