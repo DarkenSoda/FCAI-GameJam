@@ -5,11 +5,30 @@ public class EnvironmentController : MonoBehaviour
     [SerializeField] Seasons currentSeason;
     [SerializeField] GameObject[] seasonObjects;
     private int previousSeasonIndex;
-    
-    public void Start()
+
+    public void Awake()
+    {
+        foreach (var season in seasonObjects)
+        {
+            season.SetActive(false);
+        }
+        GameInput.Instance.OnPlayerChangeEnvironment += OnPlayerChangeEnvironment;
+    }
+
+    private void OnPlayerChangeEnvironment(object sender, System.EventArgs e)
     {
         previousSeasonIndex = (int)currentSeason;
         seasonObjects[previousSeasonIndex].SetActive(false);
+
+        int nextSeasonIndex = (((int)currentSeason) + 1) % 4;
+        Seasons nextSeasonValue = (Seasons)nextSeasonIndex;
+        currentSeason = nextSeasonValue;
+
+        seasonObjects[nextSeasonIndex].SetActive(true);
+    }
+
+    public void Start()
+    {
         switch (currentSeason)
         {
             case Seasons.Winter:
@@ -28,15 +47,8 @@ public class EnvironmentController : MonoBehaviour
                 break;
         }
     }
-    public void ChangeEnvironment()
+    private void OnDestroy()
     {
-        previousSeasonIndex = (int)currentSeason;
-        seasonObjects[previousSeasonIndex].SetActive(false);
-        
-        int nextSeasonIndex = (((int)currentSeason)+1) % 4;
-        Seasons nextSeasonValue = (Seasons)nextSeasonIndex;     
-        currentSeason = nextSeasonValue;
-        
-        seasonObjects[nextSeasonIndex].SetActive(true); 
+        GameInput.Instance.OnPlayerChangeEnvironment -= OnPlayerChangeEnvironment;
     }
 }
