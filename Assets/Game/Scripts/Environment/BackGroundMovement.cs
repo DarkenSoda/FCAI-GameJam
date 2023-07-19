@@ -4,17 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BackGroundMovement : MonoBehaviour {
-    [SerializeField] private Player player;
-
-
-    [SerializeField] private float backgroundSpeed;
+    [SerializeField] private float backgroundSpeed = .03f;
     [SerializeField] private RawImage backgroundImage;
 
+    private void Start() {
+        GetComponent<Canvas>().worldCamera = Camera.main;
+    }
 
     private void Update() {
-        float horizontal = player.GetVelocity().x;
-
         backgroundImage.uvRect = new Rect(backgroundImage.uvRect.position + 
-                new Vector2(horizontal, 0f) * backgroundSpeed * Time.deltaTime, backgroundImage.uvRect.size);
+                new Vector2(1f, 0f) * backgroundSpeed * Time.deltaTime, backgroundImage.uvRect.size);
     }
 }

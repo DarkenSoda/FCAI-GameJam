@@ -29,26 +29,29 @@ public class Player : MonoBehaviour {
     void Update() {
         Flip();
         ShowDust();
-        HandleMovement();
     }
 
     private void FixedUpdate() {
         IsGrounded = Physics2D.OverlapBox(feet.position, checkSphereRadius, 0f, groundLayer);
+        HandleMovement();
     }
 
     private void HandleMovement() {
         horizontal = GameInput.Instance.GetHorizontalMovement();
 
-        float moveDir = horizontal * moveSpeed;
+        float moveDir = horizontal * moveSpeed * Time.fixedDeltaTime;
+        float slidingVelocity = slidingSpeed * Time.fixedDeltaTime;
+
         if (GetComponent<IceSliding>().IsOnIce) {
             if (IsFacingRight) {
-                rb.velocity = new Vector2((moveDir + slidingSpeed) * Time.deltaTime, rb.velocity.y);
+                rb.velocity = new Vector2(moveDir + slidingVelocity, rb.velocity.y);
             } else {
-                rb.velocity = new Vector2((moveDir - slidingSpeed) * Time.deltaTime, rb.velocity.y);
+                rb.velocity = new Vector2(moveDir - slidingVelocity, rb.velocity.y);
             }
         } else {
-            rb.velocity = new Vector2(moveDir * Time.deltaTime, rb.velocity.y);
+            rb.velocity = new Vector2(moveDir, rb.velocity.y);
         }
+
 
         IsWalking = horizontal != 0f;
     }
