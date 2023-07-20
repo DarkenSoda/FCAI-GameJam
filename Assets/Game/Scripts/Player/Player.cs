@@ -59,7 +59,7 @@ public class Player : MonoBehaviour {
     private void HandleMovement() {
         horizontal = GameInput.Instance.GetHorizontalMovement();
 
-        if (GameManager.Instance.IsChangingSeason) {
+        if (GameManager.Instance.IsChangingSeason || GameManager.Instance.IsLevelCompleted) {
             horizontal = 0f;
         }
 
@@ -81,6 +81,7 @@ public class Player : MonoBehaviour {
     }
 
     private void OnJump(object sender, EventArgs e) {
+        if (GameManager.Instance.IsChangingSeason || GameManager.Instance.IsLevelCompleted) return;
         if (!IsGrounded) return;
 
         rb.velocity = new Vector2(rb.velocity.x, jumpingPower);

@@ -10,13 +10,15 @@ public class EnvironmentController : MonoBehaviour
     {
         foreach (var season in seasonObjects)
         {
-            season.SetActive(false);
+            if(season.activeInHierarchy) season.SetActive(false);
         }
         GameManager.Instance.OnSeasonChange += OnPlayerChangeEnvironment;
     }
 
     private void OnPlayerChangeEnvironment(object sender, System.EventArgs e)
     {
+        if (GameManager.Instance.IsLevelCompleted) return;
+        
         previousSeasonIndex = (int)currentSeason;
         seasonObjects[previousSeasonIndex].SetActive(false);
 

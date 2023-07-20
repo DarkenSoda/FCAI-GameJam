@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour {
 
     public event EventHandler OnSeasonChangeStart;
     public event EventHandler OnSeasonChange;
+    public event EventHandler OnLevelComplete;
 
-    public bool IsChangingSeason{ get; private set; }
+    public bool IsChangingSeason { get; private set; }
+    public bool IsLevelCompleted { get; private set; }
 
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -22,8 +24,8 @@ public class GameManager : MonoBehaviour {
     }
 
     private void OnPlayerChangeEnvironment(object sender, EventArgs e) {
-        if(!Player.Instance.IsGrounded) return;
-        if(IsChangingSeason) return;
+        if (IsChangingSeason || IsLevelCompleted) return;
+        if (!Player.Instance.IsGrounded) return;
 
         IsChangingSeason = true;
         OnSeasonChangeStart?.Invoke(this, EventArgs.Empty);
@@ -36,5 +38,10 @@ public class GameManager : MonoBehaviour {
 
     public void EndChangeSeason() {
         IsChangingSeason = false;
+    }
+
+    public void LevelCompleted() {
+        IsLevelCompleted = true;
+        OnLevelComplete?.Invoke(this, EventArgs.Empty);
     }
 }
