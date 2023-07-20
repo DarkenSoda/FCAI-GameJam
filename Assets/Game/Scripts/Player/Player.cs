@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    public static Player Instance;
+    public static Player Instance { get; private set; }
 
     private float horizontal;
     private Rigidbody2D rb;
@@ -21,7 +21,11 @@ public class Player : MonoBehaviour {
     [SerializeField] private LayerMask groundLayer;
 
     private void Awake() {
-        if (Instance == null) Instance = this;
+        if (Instance != null && Instance != this) {
+            Destroy(this);
+        } else {
+            Instance = this;
+        }
     }
 
     private void Start() {

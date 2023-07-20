@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour {
-    public static GameInput Instance;
+    public static GameInput Instance { get; private set; }
     public event EventHandler OnPlayerJump;
     public event EventHandler OnPlayerChangeEnvironment;
     private GameInputActions inputActions;
 
     void Awake() {
-        if (Instance == null) {
+        if (Instance != null && Instance != this) {
+            Destroy(this);
+        } else {
             Instance = this;
         }
         inputActions = new GameInputActions();

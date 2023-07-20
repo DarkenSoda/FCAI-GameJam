@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set; }
 
     public event EventHandler OnSeasonChangeStart;
     public event EventHandler OnSeasonChange;
@@ -12,7 +12,11 @@ public class GameManager : MonoBehaviour {
     public bool IsLevelCompleted { get; private set; }
 
     private void Awake() {
-        if (Instance == null) Instance = this;
+        if (Instance != null && Instance != this) {
+            Destroy(this);
+        } else {
+            Instance = this;
+        }
     }
 
     private void Start() {
