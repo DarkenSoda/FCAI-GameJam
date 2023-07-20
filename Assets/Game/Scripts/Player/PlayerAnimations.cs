@@ -20,11 +20,11 @@ public class PlayerAnimations : MonoBehaviour {
     private void Start() {
         anim = GetComponent<Animator>();
 
-        GameManager.Instance.OnSeasonChange += SwitchSeasonAnimation;
+        GameManager.Instance.OnSeasonChangeStart += SwitchSeasonAnimation;
     }
 
     private void OnDestroy() {
-        GameManager.Instance.OnSeasonChange -= SwitchSeasonAnimation;
+        GameManager.Instance.OnSeasonChangeStart -= SwitchSeasonAnimation;
     }
 
     private void Update() {
@@ -38,6 +38,7 @@ public class PlayerAnimations : MonoBehaviour {
 
     private int GetState() {
         if(Time.time < lockedTill) return currentState;
+        if(GameManager.Instance.IsChangingSeason) return currentState;
 
         Vector2 velocity = GetComponentInParent<Player>().GetVelocity();
 
@@ -57,9 +58,7 @@ public class PlayerAnimations : MonoBehaviour {
     }
 
     public void SwitchSeasonAnimation(object sender, EventArgs e) {
-        if (Time.time < lockedTill) return;
-
-        currentState = LockState(SwitchSeason, 3f);
+        currentState = SwitchSeason;
     }
 
     public bool IsChangingSeason { get; private set; }

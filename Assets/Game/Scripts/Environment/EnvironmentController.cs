@@ -31,19 +31,17 @@ public class EnvironmentController : MonoBehaviour
     {
         switch (currentSeason)
         {
-            case Seasons.Spring:
+            case Seasons.Summer:
                 seasonObjects[0].SetActive(true);
                 break;
-            case Seasons.Summer:
+            case Seasons.Autumn:
                 seasonObjects[1].SetActive(true);
                 break;
-            case Seasons.Autumn:
+            case Seasons.Winter:
                 seasonObjects[2].SetActive(true);
                 break;
-            case Seasons.Winter:
+            case Seasons.Spring:
                 seasonObjects[3].SetActive(true);
-                break;
-            default: 
                 break;
         }
     }

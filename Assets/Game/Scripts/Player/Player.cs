@@ -2,9 +2,12 @@ using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    public static Player Instance;
+
     private float horizontal;
     private Rigidbody2D rb;
-    private Dust dust;
+    [SerializeField] private UIShowHide dust;
+    [SerializeField] private UIShowHide button;
     private Vector2 spawnPoint;
 
     [Header("Values")]
@@ -17,10 +20,14 @@ public class Player : MonoBehaviour {
     [SerializeField] private Transform feet;
     [SerializeField] private LayerMask groundLayer;
 
+    private void Awake() {
+        if (Instance == null) Instance = this;
+    }
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
-        dust = GetComponentInChildren<Dust>();
         dust.Hide();
+        button.Hide();
         IsFacingRight = true;
         spawnPoint = transform.position;
         GameInput.Instance.OnPlayerJump += OnJump;
@@ -32,6 +39,7 @@ public class Player : MonoBehaviour {
     void Update() {
         Flip();
         ShowDust();
+        ShowButton();
     }
 
     private void FixedUpdate() {
@@ -43,14 +51,17 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag == "SpawnPoint") {
             spawnPoint = other.transform.GetChild(0).position;
             Debug.Log(spawnPoint);
-        }
-        else if (other.gameObject.tag == "Killable") {
+        } else if (other.gameObject.tag == "Killable") {
             transform.position = spawnPoint;
         }
     }
 
     private void HandleMovement() {
         horizontal = GameInput.Instance.GetHorizontalMovement();
+
+        if (GameManager.Instance.IsChangingSeason) {
+            horizontal = 0f;
+        }
 
         float moveDir = horizontal * moveSpeed * Time.fixedDeltaTime;
         float slidingVelocity = slidingSpeed * Time.fixedDeltaTime;
@@ -89,6 +100,14 @@ public class Player : MonoBehaviour {
             dust.Show();
         } else {
             dust.Hide();
+        }
+    }
+
+    private void ShowButton() {
+        if (GameManager.Instance.IsChangingSeason) {
+            button.Show();
+        } else {
+            button.Hide();
         }
     }
 
