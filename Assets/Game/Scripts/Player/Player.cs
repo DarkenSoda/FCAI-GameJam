@@ -5,6 +5,8 @@ public class Player : MonoBehaviour {
     private float horizontal;
     private Rigidbody2D rb;
     private Dust dust;
+    private Vector2 spawnPoint;
+
     [Header("Values")]
     [SerializeField] private float jumpingPower = 8f;
     [SerializeField] private float moveSpeed = 4f;
@@ -20,6 +22,7 @@ public class Player : MonoBehaviour {
         dust = GetComponentInChildren<Dust>();
         dust.Hide();
         IsFacingRight = true;
+        spawnPoint = transform.position;
         GameInput.Instance.OnPlayerJump += OnJump;
     }
     private void OnDestroy() {
@@ -34,6 +37,16 @@ public class Player : MonoBehaviour {
     private void FixedUpdate() {
         IsGrounded = Physics2D.OverlapBox(feet.position, checkSphereRadius, 0f, groundLayer);
         HandleMovement();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "SpawnPoint") {
+            spawnPoint = transform.position;
+            Debug.Log(spawnPoint);
+        }
+        else if (other.gameObject.tag == "Killable") {
+            transform.position = spawnPoint;
+        }
     }
 
     private void HandleMovement() {
