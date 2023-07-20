@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "SpawnPoint") {
-            spawnPoint = transform.position;
+            spawnPoint = other.transform.GetChild(0).position;
             Debug.Log(spawnPoint);
         }
         else if (other.gameObject.tag == "Killable") {

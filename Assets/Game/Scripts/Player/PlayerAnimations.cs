@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,18 @@ public class PlayerAnimations : MonoBehaviour {
     private readonly int Jump = Animator.StringToHash("Jump");
     private readonly int Fall = Animator.StringToHash("Fall");
     private readonly int Land = Animator.StringToHash("Land");
+    private readonly int SwitchSeason = Animator.StringToHash("SwitchSeason");
 
     private float lockedTill;
 
     private void Start() {
         anim = GetComponent<Animator>();
+
+        GameManager.Instance.OnSeasonChange += SwitchSeasonAnimation;
+    }
+
+    private void OnDestroy() {
+        GameManager.Instance.OnSeasonChange -= SwitchSeasonAnimation;
     }
 
     private void Update() {
@@ -47,4 +55,12 @@ public class PlayerAnimations : MonoBehaviour {
         lockedTill = Time.time + delay;
         return state;
     }
+
+    public void SwitchSeasonAnimation(object sender, EventArgs e) {
+        if (Time.time < lockedTill) return;
+
+        currentState = LockState(SwitchSeason, 3f);
+    }
+
+    public bool IsChangingSeason { get; private set; }
 }

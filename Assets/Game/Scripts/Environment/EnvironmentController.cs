@@ -12,7 +12,7 @@ public class EnvironmentController : MonoBehaviour
         {
             season.SetActive(false);
         }
-        GameInput.Instance.OnPlayerChangeEnvironment += OnPlayerChangeEnvironment;
+        GameManager.Instance.OnSeasonChange += OnPlayerChangeEnvironment;
     }
 
     private void OnPlayerChangeEnvironment(object sender, System.EventArgs e)
@@ -49,6 +49,6 @@ public class EnvironmentController : MonoBehaviour
     }
     private void OnDestroy()
     {
-        GameInput.Instance.OnPlayerChangeEnvironment -= OnPlayerChangeEnvironment;
+        GameManager.Instance.OnSeasonChange -= OnPlayerChangeEnvironment;
     }
 }
