@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8513973129456549828}
   - component: {fileID: 5106244679098318143}
+  - component: {fileID: 390832586250663173}
   m_Layer: 0
   m_Name: LevelCompletion
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &5106244679098318143
 BoxCollider2D:
@@ -77,3 +78,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 25.727146}
   m_EdgeRadius: 0
+--- !u!114 &390832586250663173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7922118870065866609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891830e5e72b59b4bb2e6677f48e437e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

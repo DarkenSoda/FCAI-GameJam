@@ -1,13 +1,16 @@
 using System;
 using UnityEngine;
 
-public class LevelCompleteCanvasUI : MonoBehaviour
-{
-    [SerializeField] private LevelCompleteUI UI;
+public class LevelCompleteCanvasUI : MonoBehaviour {
+    [SerializeField] private int nextLevelNumber;
+
+    [SerializeField] private LevelCompleteUI nextLevelUI;
+    [SerializeField] private LastLevelCompleteUI lastLevelUI;
 
     private void Start() {
         GameManager.Instance.OnLevelComplete += LevelCompleted;
-        if(UI.gameObject.activeInHierarchy) UI.Hide();
+        if (nextLevelUI.gameObject.activeInHierarchy) nextLevelUI.Hide();
+        if (lastLevelUI.gameObject.activeInHierarchy) lastLevelUI.Hide();
     }
 
     private void OnDestroy() {
@@ -15,6 +18,12 @@ public class LevelCompleteCanvasUI : MonoBehaviour
     }
 
     private void LevelCompleted(object sender, EventArgs e) {
-        UI.Show();
+        Loader.SaveLastLevelReached(nextLevelNumber);
+        if (Loader.IsLastLevel) {
+            lastLevelUI.Show();
+        } else {
+            nextLevelUI.Show();
+            nextLevelUI.SetLevel(nextLevelNumber);
+        }
     }
 }

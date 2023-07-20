@@ -58,9 +58,6 @@ public class Player : MonoBehaviour {
         } else if (other.gameObject.tag == "Killable") {
             transform.position = spawnPoint;
         }
-        else if (other.gameObject.name == "LevelCompletion") {
-            GameManager.Instance.LevelCompleted();
-        }
     }
 
     private void HandleMovement() {
