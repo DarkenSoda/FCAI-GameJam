@@ -11,9 +11,7 @@ public class EnvironmentController : MonoBehaviour
         foreach (var season in seasonObjects)
         {
             if(season.activeInHierarchy) season.SetActive(false);
-        }
-        GameManager.Instance.OnSeasonChange += OnPlayerChangeEnvironment;
-    }
+        }    }
 
     private void OnPlayerChangeEnvironment(object sender, System.EventArgs e)
     {
@@ -31,6 +29,8 @@ public class EnvironmentController : MonoBehaviour
 
     public void Start()
     {
+        GameManager.Instance.OnSeasonChange += OnPlayerChangeEnvironment;
+
         switch (currentSeason)
         {
             case Seasons.Summer:
