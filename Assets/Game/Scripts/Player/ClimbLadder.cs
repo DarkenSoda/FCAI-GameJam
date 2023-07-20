@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ClimbLadder : MonoBehaviour {
     private bool inLadderRange;
     [SerializeField] private float climbingSpeed = 4f;
-    [SerializeField] private GameInput gameInput;
     private Rigidbody2D rb;
 
     private void Start() {
@@ -17,7 +14,7 @@ public class ClimbLadder : MonoBehaviour {
     }
 
     private void HandleClimbing() {
-        float vertical = gameInput.GetVerticalMovement();
+        float vertical = GameInput.Instance.GetVerticalMovement();
 
         if (inLadderRange && Mathf.Abs(vertical) > 0f) {
             IsClimbing = true;
