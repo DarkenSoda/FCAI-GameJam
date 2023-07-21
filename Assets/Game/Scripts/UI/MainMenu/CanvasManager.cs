@@ -8,6 +8,10 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject settingsManager;
     [SerializeField] private SettingsMenuUI settingsMenuUI;
     [SerializeField] private ButtonsHandler buttons;
+    
+    private void Awake() {
+        Loader.LoadLast();    
+    }
     void Start()
     {
         if (settingsManager.activeInHierarchy) { 

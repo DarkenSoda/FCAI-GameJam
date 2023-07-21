@@ -54,9 +54,11 @@ public static class Loader {
         PlayerPrefs.Save();
         lastLevelReachedIndex = index;
     }
+    public static void LoadLast() {
+        lastLevelReachedIndex = PlayerPrefs.GetInt("LastLevelReached");
+    }
 
     public static void LoadLastLevelReached() {
-        lastLevelReachedIndex = PlayerPrefs.GetInt("LastLevelReached");
         LoadLevel(lastLevelReachedIndex);
     }
 }
