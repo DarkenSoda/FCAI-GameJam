@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public static class Loader {
     public static int lastLevelReachedIndex { get; private set; }
-    public static bool IsLastLevel = false;
+    public static bool IsLastLevel { get; private set; } = false;
 
     public static void LoadLevel(int index) {
         index += 1;
