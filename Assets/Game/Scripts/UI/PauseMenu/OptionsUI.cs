@@ -50,6 +50,8 @@ public class OptionsUI : MonoBehaviour {
 
     private void Update() {
         IsGamePaused = isPauseActive || isSettingsActive;
+        
+        GameManager.Instance.SetIsGamePaused(IsGamePaused);
 
         if (IsGamePaused) {
             UI.Show();
