@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class Loader {
-    private static int lastLevelReachedIndex;
+    public static int lastLevelReachedIndex { get; private set; }
     public static bool IsLastLevel = false;
 
     public static void LoadLevel(int index) {
         index += 1;
-        
+
         if (index > SceneManager.sceneCountInBuildSettings - 1 || index < 0) {
             return;
         }
@@ -33,6 +33,12 @@ public static class Loader {
         }
     }
 
+    private static IEnumerator MainMenuLoading(int index) {
+        GameManager.Instance.GetComponent<Animator>().SetTrigger("LevelTransition");
+        yield return new WaitForSecondsRealtime(2f);
+        SceneManager.LoadScene(index);
+    }
+
     public static void StartNewGame() {
         SaveLastLevelReached(1);
         IsLastLevel = false;
@@ -40,7 +46,7 @@ public static class Loader {
     }
 
     public static void LoadMainMenu() {
-        LoadLevel(-1);
+        GameManager.Instance.StartCoroutine(MainMenuLoading(0));
     }
 
     public static void SaveLastLevelReached(int index) {

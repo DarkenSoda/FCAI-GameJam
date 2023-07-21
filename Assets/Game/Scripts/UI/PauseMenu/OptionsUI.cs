@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class OptionsUI : MonoBehaviour {
     public static OptionsUI Instance;
-    [SerializeField] private GameObject UI;
+    [SerializeField] private PauseMenuAnimation UI;
     [SerializeField] private PauseMenuUI pauseMenu;
     [SerializeField] private SettingsMenuUI settingsMenu;
 
@@ -22,7 +22,7 @@ public class OptionsUI : MonoBehaviour {
     }
 
     private void Start() {
-        if (UI.activeInHierarchy) UI.SetActive(false);
+        if (UI.gameObject.activeInHierarchy) UI.Hide();
 
         pauseMenu.continueBtn.onClick.AddListener(() => {
             PauseLogic(this, EventArgs.Empty);
@@ -52,9 +52,9 @@ public class OptionsUI : MonoBehaviour {
         IsGamePaused = isPauseActive || isSettingsActive;
 
         if (IsGamePaused) {
-            UI.SetActive(true);
+            UI.Show();
         } else {
-            UI.SetActive(false);
+            UI.HideAnimation();
         }
 
         if (isPauseActive) pauseMenu.Show();
