@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class GameInput : MonoBehaviour {
     public static GameInput Instance { get; private set; }
     public event EventHandler OnPlayerJump;
+    public event EventHandler OnGamePaused;
     public event EventHandler OnPlayerChangeEnvironment;
     private GameInputActions inputActions;
 
@@ -22,25 +23,33 @@ public class GameInput : MonoBehaviour {
         inputActions.Enable();
         inputActions.Player.Jump.performed += OnPlayerJumpPerformed;
         inputActions.Player.EnvironmentChange.performed += OnPlayerChangeEnvironmentPerformed;
+        inputActions.Player.PauseGame.performed += OnGamePausedPerformed;
     }
 
     private void OnDestroy() {
         inputActions.Player.Jump.performed -= OnPlayerJumpPerformed;
         inputActions.Player.EnvironmentChange.performed -= OnPlayerChangeEnvironmentPerformed;
+        inputActions.Player.PauseGame.performed -= OnGamePausedPerformed;
         inputActions.Dispose();
     }
 
     private void OnPlayerJumpPerformed(InputAction.CallbackContext callbackContext) {
         OnPlayerJump.Invoke(this, EventArgs.Empty);
     }
-    private void OnPlayerChangeEnvironmentPerformed(InputAction.CallbackContext callbackContext)
-    {
+
+    private void OnGamePausedPerformed(InputAction.CallbackContext callbackContext) {
+        OnGamePaused?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnPlayerChangeEnvironmentPerformed(InputAction.CallbackContext callbackContext) {
         OnPlayerChangeEnvironment.Invoke(this, EventArgs.Empty);
     }
+
     public float GetHorizontalMovement() {
         float input = inputActions.Player.Movement.ReadValue<float>();
         return input;
     }
+
     public float GetVerticalMovement() {
         float input = inputActions.Player.Climb.ReadValue<float>();
         return input;

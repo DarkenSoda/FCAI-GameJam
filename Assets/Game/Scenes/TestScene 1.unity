@@ -1674,6 +1674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelCompletion
       objectReference: {fileID: 0}
+    - target: {fileID: 7922118870065866609, guid: d731e2faea10a3644af374b92cd9aad9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8513973129456549828, guid: d731e2faea10a3644af374b92cd9aad9, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1903,9 +1907,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6046041574252054955, guid: 4a77ed3e2e99a844c98c3d371bfc0498, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8015490227268513755, guid: 4a77ed3e2e99a844c98c3d371bfc0498, type: 3}
       propertyPath: m_Name
       value: LevelCompletedCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015490227268513755, guid: 4a77ed3e2e99a844c98c3d371bfc0498, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8592437588540978374, guid: 4a77ed3e2e99a844c98c3d371bfc0498, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2030,9 +2042,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3243257681014463566, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046988223588287526, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5929999148195334510, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102140652359870643, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6755158064461976906, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755158064461976906, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8342772102264343832, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
       propertyPath: m_RootOrder

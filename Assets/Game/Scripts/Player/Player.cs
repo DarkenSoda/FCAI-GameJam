@@ -63,7 +63,8 @@ public class Player : MonoBehaviour {
     private void HandleMovement() {
         horizontal = GameInput.Instance.GetHorizontalMovement();
 
-        if (GameManager.Instance.IsChangingSeason || GameManager.Instance.IsLevelCompleted) {
+        if (GameManager.Instance.IsGamePaused || GameManager.Instance.IsChangingSeason
+            || GameManager.Instance.IsLevelCompleted) {
             horizontal = 0f;
         }
 
@@ -85,6 +86,7 @@ public class Player : MonoBehaviour {
     }
 
     private void OnJump(object sender, EventArgs e) {
+        if (GameManager.Instance.IsGamePaused) return;
         if (GameManager.Instance.IsChangingSeason || GameManager.Instance.IsLevelCompleted) return;
         if (!IsGrounded) return;
 

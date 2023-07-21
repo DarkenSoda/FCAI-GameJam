@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public event EventHandler OnSeasonChange;
     public event EventHandler OnLevelComplete;
 
+    public bool IsGamePaused { get; private set; }
     public bool IsChangingSeason { get; private set; }
     public bool IsLevelCompleted { get; private set; }
 
@@ -19,6 +20,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    private void Update() {
+        IsGamePaused = OptionsUI.Instance.IsGamePaused;
+    }
+
     private void Start() {
         GameInput.Instance.OnPlayerChangeEnvironment += OnPlayerChangeEnvironment;
     }
@@ -28,7 +33,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void OnPlayerChangeEnvironment(object sender, EventArgs e) {
-        if (IsChangingSeason || IsLevelCompleted) return;
+        if (IsGamePaused || IsChangingSeason || IsLevelCompleted) return;
         if (!Player.Instance.IsGrounded) return;
 
         IsChangingSeason = true;
