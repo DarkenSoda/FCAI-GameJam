@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     public static Player Instance { get; private set; }
-
+    public event EventHandler OnSnowCollection;
     private float horizontal;
     private Rigidbody2D rb;
     [SerializeField] private UIShowHide dust;
@@ -20,6 +20,9 @@ public class Player : MonoBehaviour {
     [SerializeField] private Transform feet;
     [SerializeField] private LayerMask groundLayer;
 
+    private void SnowCollected() {
+        OnSnowCollection?.Invoke(this,EventArgs.Empty);
+    }
     private void Awake() {
         if (Instance != null && Instance != this) {
             Destroy(this);
@@ -57,6 +60,11 @@ public class Player : MonoBehaviour {
             Debug.Log(spawnPoint);
         } else if (other.gameObject.tag == "Killable") {
             transform.position = spawnPoint;
+        }
+        else if (other.gameObject.tag == "SnowBall") {
+            other.gameObject.SetActive(false);
+            SnowCollected();
+
         }
     }
 

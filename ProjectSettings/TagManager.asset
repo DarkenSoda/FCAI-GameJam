@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Killable
   - SpawnPoint
-  - EndOfTextCollider
+  - SnowBall
   layers:
   - Default
   - TransparentFX

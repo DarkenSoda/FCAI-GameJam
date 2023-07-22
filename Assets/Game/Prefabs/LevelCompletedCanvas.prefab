@@ -1986,5 +1986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelNumber: 0
+  availableSnowBalls: 3
   nextLevelUI: {fileID: 4703618339638836657}
   lastLevelUI: {fileID: 8873922075952037580}
+  player: {fileID: 6753525593881901674, guid: 5865ff0c6088211458f6ca673c32fcaf, type: 3}
