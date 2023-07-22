@@ -6,17 +6,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class CreditsController : UIShowHide
 {
-    private float time;
+    [SerializeField] private GameObject endGameObject;
+    [SerializeField] private float endYPosition;
     [SerializeField] private Transform credits;
     [SerializeField] private float creditsSpeed;
-    [SerializeField] private float waitTime = 10f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform creditsPosition;
 
 
-    private void OnEnable() {
-        time = 0;
-    }
     private void Start()
     {
         gameInput.OnGamePaused += OnStopCredits;
@@ -33,7 +30,6 @@ public class CreditsController : UIShowHide
     private void Update()
     {
         credits.Translate(Vector2.up * creditsSpeed * Time.deltaTime, Space.World);
-        time += Time.deltaTime;
         EndCredits();
     }
 
@@ -47,13 +43,12 @@ public class CreditsController : UIShowHide
         base.Show();
         credits.position = creditsPosition.position;
     }
-    private void EndCredits()
+    public void EndCredits()
     {
-        if (time < waitTime) {
+        if (endGameObject.transform.position.y < endYPosition) {
             return;
-        }   
-
-        // End credits scene
+        }
+          // End credits scene
         OnStopCredits(this, EventArgs.Empty);
     }
 }
