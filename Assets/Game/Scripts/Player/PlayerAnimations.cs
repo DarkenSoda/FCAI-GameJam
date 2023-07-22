@@ -30,24 +30,30 @@ public class PlayerAnimations : MonoBehaviour {
     private void Update() {
         currentState = GetState();
 
-        if(currentState == previousState) return;
+        if (currentState == previousState) return;
 
         previousState = currentState;
         anim.CrossFade(currentState, 0, 0);
     }
 
     private int GetState() {
-        if(Time.time < lockedTill) return currentState;
-        if(GameManager.Instance.IsChangingSeason) return currentState;
+        if (Time.time < lockedTill) return currentState;
+        if (GameManager.Instance.IsChangingSeason) return currentState;
 
         Vector2 velocity = GetComponentInParent<Player>().GetVelocity();
 
-        if(velocity.y > 0) return Jump;
-        if(velocity.y < 0) return Fall;
+        if (velocity.y != 0 && Player.Instance.IsGrounded) {
+            if (Player.Instance.IsWalking) {
+                return Run;
+            } else return Idle;
+        }
 
-        if(velocity.y == 0 && currentState == Fall) return LockState(Land, .2f);
+        if (velocity.y > 0) return Jump;
+        if (velocity.y < 0) return Fall;
 
-        if(GetComponentInParent<Player>().IsWalking) return Run;
+        if (velocity.y == 0 && currentState == Fall) return LockState(Land, .2f);
+
+        if (GetComponentInParent<Player>().IsWalking) return Run;
 
         return Idle;
     }

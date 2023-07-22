@@ -5,7 +5,7 @@ public class LevelCompleteCanvasUI : MonoBehaviour {
     [SerializeField] private int nextLevelNumber;
 
     [SerializeField] int availableSnowBalls;
-     private int collectedSnowBall = 0;
+    private int collectedSnowBall = 0;
     [SerializeField] private LevelCompleteUI nextLevelUI;
     [SerializeField] private LastLevelCompleteUI lastLevelUI;
     [SerializeField] private Player player;
@@ -22,7 +22,7 @@ public class LevelCompleteCanvasUI : MonoBehaviour {
         player.OnSnowCollection -= SnowBallCollection;
     }
 
-    private void SnowBallCollection(object sender,EventArgs e) {
+    private void SnowBallCollection(object sender, EventArgs e) {
         collectedSnowBall++;
         Debug.Log(collectedSnowBall);
     }
