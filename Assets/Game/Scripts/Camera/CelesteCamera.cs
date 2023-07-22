@@ -6,6 +6,7 @@ public class CelesteCamera : MonoBehaviour {
 
     private void Start() {
         cinemachine = GetComponentInChildren<CinemachineVirtualCamera>();
+        cinemachine.Follow = Player.Instance.transform;
 
         cinemachine.gameObject.SetActive(false);
     }

@@ -427,7 +427,7 @@ Transform:
   - {fileID: 4873958992554892288}
   - {fileID: 8909125797600827123}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &8209217951494697418
 Rigidbody2D:
@@ -518,7 +518,7 @@ MonoBehaviour:
   jumpingPower: 7
   moveSpeed: 150
   slidingSpeed: 40
-  checkSphereRadius: {x: 0.46, y: 0.1}
+  checkSphereRadius: {x: 0.42, y: 0.1}
   feet: {fileID: 4247979435497579415}
   groundLayer:
     serializedVersion: 2
