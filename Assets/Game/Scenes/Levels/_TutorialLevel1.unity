@@ -19858,11 +19858,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 725494525744621380, guid: 062c6c4444a17124983eb5adcc17fc89, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.75
+      value: 26.410002
       objectReference: {fileID: 0}
     - target: {fileID: 725494525744621380, guid: 062c6c4444a17124983eb5adcc17fc89, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.38
+      value: -1.98
       objectReference: {fileID: 0}
     - target: {fileID: 725494525744621380, guid: 062c6c4444a17124983eb5adcc17fc89, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39583,6 +39583,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6755158064461976906, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203488081382105401, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}
+      propertyPath: availableSnowBalls
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8342772102264343832, guid: 30c5f86ec2d02c24aa5b349ad2b07e63, type: 3}

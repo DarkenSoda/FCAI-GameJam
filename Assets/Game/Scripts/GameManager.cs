@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+    public int availableSnowBalls;
+    public int collectedSnowBall{ get; private set; }
     public static GameManager Instance { get; private set; }
 
     public event EventHandler OnSeasonChangeStart;
@@ -21,11 +23,19 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Start() {
+        collectedSnowBall = 0;
         GameInput.Instance.OnPlayerChangeEnvironment += OnPlayerChangeEnvironment;
+        SnowBall.OnSnowCollection += OnSnowBallCollected;
     }
 
     private void OnDestroy() {
         GameInput.Instance.OnPlayerChangeEnvironment -= OnPlayerChangeEnvironment;
+        SnowBall.OnSnowCollection -= OnSnowBallCollected;
+    }
+
+    private void OnSnowBallCollected(object sender, EventArgs e) {
+        collectedSnowBall++;
+
     }
 
     private void OnPlayerChangeEnvironment(object sender, EventArgs e) {
