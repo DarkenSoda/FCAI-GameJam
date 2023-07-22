@@ -8,12 +8,17 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject settingsManager;
     [SerializeField] private SettingsMenuUI settingsMenuUI;
     [SerializeField] private ButtonsHandler buttons;
+    [SerializeField] private CreditsController credits;
+    [SerializeField] private GameObject background;
     
     private void Awake() {
         Loader.LoadLast();    
     }
     void Start()
     {
+        if (credits.gameObject.activeInHierarchy) {
+            credits.gameObject.SetActive(false);
+        }
         if (settingsManager.activeInHierarchy) { 
             settingsManager.SetActive(false);
         }
@@ -24,6 +29,9 @@ public class CanvasManager : MonoBehaviour
         buttons.optionsButton.onClick.AddListener(() => {
             buttons.Hide();
             settingsManager.SetActive(true);
+        });
+        buttons.credits.onClick.AddListener(() => {
+            credits.Show();
         });
     }
 }

@@ -8,6 +8,8 @@ public class ButtonsHandler : UIShowHide
    public Button startButton;
    public Button optionsButton;
    public Button quit;
+
+   public Button credits;
    
    public void Start() {
       

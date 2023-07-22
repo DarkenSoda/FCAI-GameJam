@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour {
     public static GameInput Instance { get; private set; }
+    public event EventHandler OnMouseClicked;
     public event EventHandler OnPlayerJump;
     public event EventHandler OnGamePaused;
     public event EventHandler OnPlayerChangeEnvironment;
@@ -24,14 +25,22 @@ public class GameInput : MonoBehaviour {
         inputActions.Player.Jump.performed += OnPlayerJumpPerformed;
         inputActions.Player.EnvironmentChange.performed += OnPlayerChangeEnvironmentPerformed;
         inputActions.Player.PauseGame.performed += OnGamePausedPerformed;
+        inputActions.Player.ExitCredits.performed += OnMouseClickedPerformed;
     }
 
     private void OnDestroy() {
         inputActions.Player.Jump.performed -= OnPlayerJumpPerformed;
         inputActions.Player.EnvironmentChange.performed -= OnPlayerChangeEnvironmentPerformed;
         inputActions.Player.PauseGame.performed -= OnGamePausedPerformed;
+        inputActions.Player.ExitCredits.performed -= OnMouseClickedPerformed;
         inputActions.Dispose();
     }
+
+    
+    private void OnMouseClickedPerformed(InputAction.CallbackContext callbackContext) {
+        OnMouseClicked?.Invoke(this, EventArgs.Empty);
+    }
+
 
     private void OnPlayerJumpPerformed(InputAction.CallbackContext callbackContext) {
         OnPlayerJump.Invoke(this, EventArgs.Empty);
