@@ -24,8 +24,20 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         collectedSnowBall = 0;
+        IsGamePaused = true;
         GameInput.Instance.OnPlayerChangeEnvironment += OnPlayerChangeEnvironment;
         SnowBall.OnSnowCollection += OnSnowBallCollected;
+    }
+    private void Update() {
+        if (IsGamePaused) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (Cursor.visible) {  
+            //if the cursor is Visible and unlocked and the game is not paused Hide it and lock it.
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     private void OnDestroy() {
