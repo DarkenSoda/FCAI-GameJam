@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         collectedSnowBall = 0;
-        IsGamePaused = true;
         GameInput.Instance.OnPlayerChangeEnvironment += OnPlayerChangeEnvironment;
         SnowBall.OnSnowCollection += OnSnowBallCollected;
     }
