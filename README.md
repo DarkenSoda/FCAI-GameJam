@@ -45,7 +45,7 @@ Found a bug or facing an issue? Please create a new issue [here](https://github.
 
 ## Feedback
 
-Your feedback is essential for enhancing Season Break. Please share your thoughts, suggestions, or any improvements you'd like to see in the game [here](https://github.com/DarkenSoda/Season-Break).
+Your feedback is essential for enhancing Season Break. Please share your thoughts, suggestions, or any improvements you'd like to see in the game [here](https://github.com/DarkenSoda/Season-Break/issues).
 
 ## License
 
