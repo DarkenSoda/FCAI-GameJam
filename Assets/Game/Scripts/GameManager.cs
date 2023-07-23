@@ -30,12 +30,9 @@ public class GameManager : MonoBehaviour {
     private void Update() {
         if (IsGamePaused || IsLevelCompleted) {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
         }
-        else if (Cursor.visible) {  
-            //if the cursor is Visible and unlocked and the game is not paused Hide it and lock it.
+        else {  
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 

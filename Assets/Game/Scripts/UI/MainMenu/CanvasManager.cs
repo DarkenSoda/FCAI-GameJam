@@ -16,6 +16,7 @@ public class CanvasManager : MonoBehaviour
     }
     void Start()
     {
+        GameManager.Instance.SetIsGamePaused(true);
         if (credits.gameObject.activeInHierarchy) {
             credits.gameObject.SetActive(false);
         }
