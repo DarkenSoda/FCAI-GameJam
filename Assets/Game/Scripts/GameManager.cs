@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
         SnowBall.OnSnowCollection += OnSnowBallCollected;
     }
     private void Update() {
-        if (IsGamePaused) {
+        if (IsGamePaused || IsLevelCompleted) {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
