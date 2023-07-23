@@ -44,7 +44,10 @@ public class SettingsMenuUI : MonoBehaviour {
     }
 
     private void LoadValues() {
-        float volume = PlayerPrefs.GetFloat("MusicVolume");
+        float volume = 5f;
+        if (PlayerPrefs.HasKey("MusicVolume")) {
+            volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
         masterAudioSlider.value = volume;
         masterAudioText.text = volume.ToString();
         AudioListener.volume = volume / 5;
