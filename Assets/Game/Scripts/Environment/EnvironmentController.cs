@@ -1,22 +1,25 @@
 using UnityEngine;
 
-public class EnvironmentController : MonoBehaviour
-{
-    [SerializeField] Seasons currentSeason;
+public class EnvironmentController : MonoBehaviour {
+    public static EnvironmentController Instance { get; private set; }
+    public Seasons currentSeason;
     [SerializeField] GameObject[] seasonObjects;
     private int previousSeasonIndex;
 
-    public void Awake()
-    {
-        foreach (var season in seasonObjects)
-        {
-            if(season.activeInHierarchy) season.SetActive(false);
-        }    }
+    public void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(this);
+        } else {
+            Instance = this;
+        }
+        foreach (var season in seasonObjects) {
+            if (season.activeInHierarchy) season.SetActive(false);
+        }
+    }
 
-    private void OnPlayerChangeEnvironment(object sender, System.EventArgs e)
-    {
+    private void OnPlayerChangeEnvironment(object sender, System.EventArgs e) {
         if (GameManager.Instance.IsLevelCompleted) return;
-        
+
         previousSeasonIndex = (int)currentSeason;
         seasonObjects[previousSeasonIndex].SetActive(false);
 
@@ -27,12 +30,10 @@ public class EnvironmentController : MonoBehaviour
         seasonObjects[nextSeasonIndex].SetActive(true);
     }
 
-    public void Start()
-    {
+    public void Start() {
         GameManager.Instance.OnSeasonChange += OnPlayerChangeEnvironment;
 
-        switch (currentSeason)
-        {
+        switch (currentSeason) {
             case Seasons.Summer:
                 seasonObjects[0].SetActive(true);
                 break;
@@ -47,8 +48,7 @@ public class EnvironmentController : MonoBehaviour
                 break;
         }
     }
-    private void OnDestroy()
-    {
+    private void OnDestroy() {
         GameManager.Instance.OnSeasonChange -= OnPlayerChangeEnvironment;
     }
 }

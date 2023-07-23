@@ -7,6 +7,10 @@ public class Player : MonoBehaviour {
     private Rigidbody2D rb;
     [SerializeField] private UIShowHide dust;
     [SerializeField] private UIShowHide button;
+    [SerializeField] private UIShowHide summer;
+    [SerializeField] private UIShowHide autumn;
+    [SerializeField] private UIShowHide winter;
+    [SerializeField] private UIShowHide spring;
     private Vector2 spawnPoint;
 
     [Header("Values")]
@@ -112,9 +116,31 @@ public class Player : MonoBehaviour {
     private void ShowButton() {
         if (GameManager.Instance.IsChangingSeason) {
             button.Show();
+            HideChats();
+            switch(EnvironmentController.Instance.currentSeason) {
+                case Seasons.Summer:
+                    summer.Show();
+                    break;
+                case Seasons.Autumn:
+                    autumn.Show();
+                    break;
+                case Seasons.Winter:
+                    winter.Show();
+                    break;
+                case Seasons.Spring:
+                    spring.Show();
+                    break;
+            }
         } else {
             button.Hide();
+            HideChats();
         }
+    }
+    private void HideChats() {
+        if(summer.gameObject.activeInHierarchy) summer.Hide();
+        if(autumn.gameObject.activeInHierarchy) autumn.Hide();
+        if(winter.gameObject.activeInHierarchy) winter.Hide();
+        if(spring.gameObject.activeInHierarchy) spring.Hide();
     }
 
     public Vector2 GetVelocity() {
