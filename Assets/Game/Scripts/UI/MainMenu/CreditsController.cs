@@ -7,21 +7,19 @@ using UnityEngine.UI;
 public class CreditsController : UIShowHide
 {
     [SerializeField] private GameObject endGameObject;
-    [SerializeField] private float endYPosition;
+    [SerializeField] private Transform endYPosition;
     [SerializeField] private Transform credits;
     [SerializeField] private float creditsSpeed;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private Transform creditsPosition;
 
 
-    private void Start()
+    private void OnEnable()
     {
         gameInput.OnGamePaused += OnStopCredits;
         gameInput.OnMouseClicked += OnStopCredits;
-
-        
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         gameInput.OnGamePaused -= OnStopCredits;
         gameInput.OnMouseClicked -= OnStopCredits;
@@ -36,6 +34,7 @@ public class CreditsController : UIShowHide
     private void OnStopCredits(object sender, EventArgs e)
     {
         // End credits scene
+        GetComponentInParent<CanvasManager>().ShowButtons();
         Hide();
     }
 
@@ -45,7 +44,7 @@ public class CreditsController : UIShowHide
     }
     public void EndCredits()
     {
-        if (endGameObject.transform.position.y < endYPosition) {
+        if (endGameObject.transform.position.y < endYPosition.position.y) {
             return;
         }
           // End credits scene
